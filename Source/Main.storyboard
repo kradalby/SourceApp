@@ -23,19 +23,12 @@
                                     <navigationItem id="40Q-0c-CNS"/>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aON-NX-8lz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aON-NX-8lz">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="NyX-G8-37g" customClass="ServerTableViewCell" customModule="Source">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="40"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NyX-G8-37g" id="bBW-NF-Fft">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="39.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="736"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="GA4-zd-B78" id="TSn-oV-TD1"/>
                                     <outlet property="delegate" destination="GA4-zd-B78" id="h1Y-xP-Ghi"/>
@@ -43,6 +36,10 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aON-NX-8lz" firstAttribute="leading" secondItem="dS1-Ac-wAr" secondAttribute="leading" id="TqT-Eh-7N1"/>
+                            <constraint firstAttribute="trailing" secondItem="aON-NX-8lz" secondAttribute="trailing" id="ZuH-wF-bPG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ztu-RY-w9A">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ifu-5J-O3g">
@@ -62,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OvM-yH-xLX" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="100"/>
+            <point key="canvasLocation" x="2022" y="99.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Rz-qD-fpC">
