@@ -30,6 +30,7 @@ class ServerInfo {
     var secure: Bool?
     var steamid: Int64?
     var version: String?
+    var players: PlayerInfo?
     
     required init(address: String) {
         self.address = address
@@ -53,7 +54,10 @@ class ServerInfo {
                             let serverInfoJSON = jason["data"][self.address]
                             self.update_data(serverInfoJSON)
                         }
-                        completionHandler()
+                        if self.players == nil {
+                            self.players = PlayerInfo(address: self.address)
+                        }
+                        self.players?.update(completionHandler)
                     }
                 case .Failure(let error):
                     print(error)
@@ -90,6 +94,7 @@ class ServerInfo {
 class PlayerInfo {
     var address: String
     var error: String?
+    var numberOfPlayers: Int?
     var players: [Player]
     
     required init(address: String) {
@@ -136,6 +141,7 @@ class PlayerInfo {
             
             self.players.append(player)
         }
+        self.numberOfPlayers = self.players.count
     }
     
     // MARK: Endpoints

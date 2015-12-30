@@ -2,14 +2,14 @@
 //  ServerTableViewCell.swift
 //  Source
 //
-//  Created by Kristoffer Dalby on 26/12/15.
+//  Created by Kristoffer Dalby on 27/12/15.
 //  Copyright © 2015 Kristoffer Dalby. All rights reserved.
 //
 
 import UIKit
 
 class ServerTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var hostnameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
@@ -24,5 +24,9 @@ class ServerTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
 }
