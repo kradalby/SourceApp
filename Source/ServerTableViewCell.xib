@@ -34,6 +34,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fzt-kf-WDA" secondAttribute="trailing" constant="8" id="Swh-LY-zgk"/>
                     <constraint firstItem="fzt-kf-WDA" firstAttribute="top" secondItem="hKA-A3-YZf" secondAttribute="bottom" constant="-1" id="bZl-yL-iI6"/>
                     <constraint firstItem="7fB-XD-QLb" firstAttribute="top" secondItem="hKA-A3-YZf" secondAttribute="bottom" constant="-1" id="zkg-42-1D8"/>
                 </constraints>
