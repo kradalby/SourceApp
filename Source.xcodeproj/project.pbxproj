@@ -20,6 +20,7 @@
 		3F64C4F91C30853600C5FDBF /* ServerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64C4F71C30853600C5FDBF /* ServerTableViewCell.swift */; };
 		3F64C4FA1C30853600C5FDBF /* ServerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F64C4F81C30853600C5FDBF /* ServerTableViewCell.xib */; };
 		3F64C4FC1C3139A200C5FDBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F64C4FB1C3139A200C5FDBF /* Main.storyboard */; };
+		3F6523331C35B739006DFAB4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6523321C35B739006DFAB4 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		3F64C4F71C30853600C5FDBF /* ServerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTableViewCell.swift; sourceTree = "<group>"; };
 		3F64C4F81C30853600C5FDBF /* ServerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerTableViewCell.xib; sourceTree = "<group>"; };
 		3F64C4FB1C3139A200C5FDBF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3F6523321C35B739006DFAB4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				3F64C4F81C30853600C5FDBF /* ServerTableViewCell.xib */,
 				3F3F0D381C2AEAEA002F1249 /* ViewController.swift */,
 				3F64C4FB1C3139A200C5FDBF /* Main.storyboard */,
+				3F6523321C35B739006DFAB4 /* DetailViewController.swift */,
 				3F3F0D401C2AEAEA002F1249 /* Assets.xcassets */,
 				3F3F0D421C2AEAEA002F1249 /* LaunchScreen.storyboard */,
 				3F3F0D451C2AEAEA002F1249 /* Info.plist */,
@@ -280,6 +283,7 @@
 				3F64C4F91C30853600C5FDBF /* ServerTableViewCell.swift in Sources */,
 				3F3F0D391C2AEAEA002F1249 /* ViewController.swift in Sources */,
 				3F40F3C41C2B2AAA00B6C01F /* SourceREST.swift in Sources */,
+				3F6523331C35B739006DFAB4 /* DetailViewController.swift in Sources */,
 				3F3F0D3F1C2AEAEA002F1249 /* Source.xcdatamodeld in Sources */,
 				3F3F0D371C2AEAEA002F1249 /* AppDelegate.swift in Sources */,
 			);

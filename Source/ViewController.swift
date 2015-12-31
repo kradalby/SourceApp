@@ -13,6 +13,8 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    
     var servers: [NSManagedObject] = []
     var serverInformationObjects: [ServerInfo] = []
     
@@ -68,7 +70,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.addSubview(self.refreshControl)
 
         
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +96,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("derp")
+        print(segue.identifier)
+        if segue.identifier == "sequeDetailViewController" {
+            if let destination = segue.destinationViewController as? DetailViewController {
+                print(destination)
+                if let index = self.tableView.indexPathForSelectedRow?.row {
+                    print(index)
+                    destination.serverInformation = self.serverInformationObjects[index]
+                }
+            }
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.serverInformationObjects.count
     }
@@ -117,6 +133,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell \(indexPath.row)!")
+        let detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
+        
+        self.navigationController!.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
