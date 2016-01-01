@@ -13,6 +13,10 @@ class InformationViewController: UITableViewController {
     
     @IBOutlet weak var hostnameLabel: UILabel!
     @IBOutlet weak var playersLabel: UILabel!
+    @IBOutlet weak var secureLabel: UILabel!
+    @IBOutlet weak var osLabel: UILabel!
+    @IBOutlet weak var mapLabel: UILabel!
+    @IBOutlet weak var gameLabel: UILabel!
     
     
     var serverInformation: ServerInfo? = nil;
@@ -28,8 +32,28 @@ class InformationViewController: UITableViewController {
         
         self.serverInformation = ServerInfo(address: "193.202.115.74:27137")
         self.serverInformation?.update({
+            
             self.hostnameLabel.text = self.serverInformation?.hostname
             self.playersLabel.text = self.serverInformation?.numberOfPlayersOfMax()
+            self.mapLabel.text = self.serverInformation?.map
+            self.gameLabel.text = self.serverInformation?.gameDescription
+            
+            if let secure = self.serverInformation?.secure {
+                if secure {
+                    self.secureLabel.text = "Yes"
+                } else {
+                    self.secureLabel.text = "No"
+                }
+            }
+            
+            if let os = self.serverInformation?.os {
+                if os == "l" {
+                    self.osLabel.text = "Linux"
+                } else {
+                    self.osLabel.text = "Windows"
+                }
+            }
+            
             self.tableView.reloadData()
         })
         
