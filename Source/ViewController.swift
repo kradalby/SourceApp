@@ -62,6 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("running vewdidlod")
         title = "Servers"
         
         //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -70,11 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.addSubview(self.refreshControl)
 
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        // Load the servers from the database and query the API
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -93,6 +90,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch {
             print("Could not fetch \(error)")
         }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("running vewdidapp")
+        
     }
     
     
@@ -100,8 +104,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("derp")
         print(segue.identifier)
-        if segue.identifier == "sequeDetailViewController" {
-            if let destination = segue.destinationViewController as? DetailViewController {
+        if segue.identifier == "SegueInformationViewController" {
+            if let destination = segue.destinationViewController as? InformationViewController {
                 print(destination)
                 if let index = self.tableView.indexPathForSelectedRow?.row {
                     print(index)
@@ -116,26 +120,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:ServerTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("ServerTableViewCell", forIndexPath: indexPath) as! ServerTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("ServerTableViewCell", forIndexPath: indexPath) as! ServerTableViewCell
 
         let serverInfo = self.serverInformationObjects[indexPath.row]
         cell.hostnameLabel.text = serverInfo.hostname
         cell.addressLabel.text = serverInfo.address
-        if let numberOfPlayers = serverInfo.players?.numberOfPlayers, let maxPlayers = serverInfo.maxPlayers {
-            cell.playersLabel.text = "\(numberOfPlayers)/\(maxPlayers)"
-        }
+        cell.playersLabel.text = serverInfo.numberOfPlayersOfMax()
+
         
         return cell
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell \(indexPath.row)!")
-        let detailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailViewController") as! DetailViewController
-        
-        self.navigationController!.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -154,6 +150,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             self.tableView.reloadData()
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("You selected cell \(indexPath.row)!")
+        let informationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationViewController") as! InformationViewController
+        
+        self.navigationController!.pushViewController(informationViewController, animated: true)
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {

@@ -84,6 +84,13 @@ class ServerInfo {
         self.steamid = json["steamid"].int64Value
     }
     
+    func numberOfPlayersOfMax() -> String? {
+        if let numberOfPlayers = self.players?.numberOfPlayers, let maxPlayers = self.maxPlayers {
+            return "\(numberOfPlayers)/\(maxPlayers)"
+        }
+        return nil
+    }
+    
     // MARK: Endpoints
     class func endpointForServerInformation() -> String {
         return "https://source.fap.no/api/v1/serverinfo"
