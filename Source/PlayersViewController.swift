@@ -19,7 +19,7 @@ class PlayersViewController: UITableViewController {
         super.viewDidLoad()
         title = "Players"
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "PlayerTableViewCell")
+        tableView.registerNib(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerTableViewCell")
         
     }
     
@@ -36,9 +36,12 @@ class PlayersViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("PlayerTableViewCell", forIndexPath: indexPath)
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("PlayerTableViewCell", forIndexPath: indexPath) as! PlayerTableViewCell
         
-        cell.textLabel?.text = self.serverInformation?.players?.players[indexPath.row].name
+        cell.playerNameLabel?.text = self.serverInformation?.players?.players[indexPath.row].name
+        if let kills = self.serverInformation?.players?.players[indexPath.row].kills {
+            cell.killsLabel.text = "\(kills)"
+        }
         
         return cell
     }

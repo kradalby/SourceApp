@@ -147,6 +147,7 @@ class PlayerInfo {
             )
             
             self.players.append(player)
+            self.players.sortInPlace({$0.kills > $1.kills})
         }
         self.numberOfPlayers = self.players.count
     }
