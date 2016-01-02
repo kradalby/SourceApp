@@ -47,7 +47,6 @@ class InformationViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell \(indexPath.row)!")
     }
     
     
@@ -55,7 +54,6 @@ class InformationViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SeguePlayersViewController" {
             if let destination = segue.destinationViewController as? PlayersViewController {
-                print(destination)
                 destination.serverInformation = self.serverInformation
             }
         }

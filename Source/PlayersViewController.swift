@@ -57,7 +57,6 @@ class PlayersViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell \(indexPath.row)!")
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {

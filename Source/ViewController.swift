@@ -63,7 +63,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("running vewdidlod")
         title = "Servers"
         
         //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -96,7 +95,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("running vewdidapp")
         
     }
     
@@ -105,9 +103,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SegueInformationViewController" {
             if let destination = segue.destinationViewController as? InformationViewController {
-                print(destination)
                 if let index = self.tableView.indexPathForSelectedRow?.row {
-                    print(index)
                     destination.serverInformation = self.serverInformationObjects[index]
                 }
             }
@@ -156,7 +152,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("You selected cell \(indexPath.row)!")
         
         self.performSegueWithIdentifier("SegueInformationViewController", sender: nil)
     }
