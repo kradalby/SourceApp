@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3F33940D1C372CA800C8A4A8 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33940C1C372CA800C8A4A8 /* PlayerTableViewCell.swift */; };
 		3F33940F1C372CDB00C8A4A8 /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F33940E1C372CDB00C8A4A8 /* PlayerTableViewCell.xib */; };
+		3F3394121C38819400C8A4A8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3394101C38819400C8A4A8 /* Alamofire.framework */; };
+		3F3394131C38819400C8A4A8 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3394101C38819400C8A4A8 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F3394141C38819400C8A4A8 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3394111C38819400C8A4A8 /* SwiftyJSON.framework */; };
+		3F3394151C38819400C8A4A8 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3394111C38819400C8A4A8 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F3F0D371C2AEAEA002F1249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F0D361C2AEAEA002F1249 /* AppDelegate.swift */; };
 		3F3F0D391C2AEAEA002F1249 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F0D381C2AEAEA002F1249 /* ViewController.swift */; };
 		3F3F0D3F1C2AEAEA002F1249 /* Source.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F3F0D3D1C2AEAEA002F1249 /* Source.xcdatamodeld */; };
@@ -43,9 +47,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3F3394161C38819500C8A4A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F3394151C38819400C8A4A8 /* SwiftyJSON.framework in Embed Frameworks */,
+				3F3394131C38819400C8A4A8 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3F33940C1C372CA800C8A4A8 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		3F33940E1C372CDB00C8A4A8 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
+		3F3394101C38819400C8A4A8 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		3F3394111C38819400C8A4A8 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		3F3F0D331C2AEAEA002F1249 /* Source.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Source.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3F0D361C2AEAEA002F1249 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F3F0D381C2AEAEA002F1249 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +95,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3394141C38819400C8A4A8 /* SwiftyJSON.framework in Frameworks */,
 				3F3F0D691C2AECB5002F1249 /* Alamofire.framework in Frameworks */,
+				3F3394121C38819400C8A4A8 /* Alamofire.framework in Frameworks */,
 				3F3F0D6A1C2AECB5002F1249 /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +122,8 @@
 		3F3F0D2A1C2AEAEA002F1249 = {
 			isa = PBXGroup;
 			children = (
+				3F3394101C38819400C8A4A8 /* Alamofire.framework */,
+				3F3394111C38819400C8A4A8 /* SwiftyJSON.framework */,
 				3F3F0D671C2AECB5002F1249 /* Alamofire.framework */,
 				3F3F0D681C2AECB5002F1249 /* SwiftyJSON.framework */,
 				3F3F0D351C2AEAEA002F1249 /* Source */,
@@ -167,6 +192,7 @@
 				3F3F0D2F1C2AEAEA002F1249 /* Sources */,
 				3F3F0D301C2AEAEA002F1249 /* Frameworks */,
 				3F3F0D311C2AEAEA002F1249 /* Resources */,
+				3F3394161C38819500C8A4A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +251,7 @@
 				TargetAttributes = {
 					3F3F0D321C2AEAEA002F1249 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = W3JQ98XCSP;
 					};
 					3F3F0D491C2AEAEA002F1249 = {
 						CreatedOnToolsVersion = 7.2;
@@ -431,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -446,6 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
