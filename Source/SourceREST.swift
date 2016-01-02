@@ -31,15 +31,15 @@ class ServerInfo {
     var version: String?
     var players: PlayerInfo?
     var error: Bool
-    
+
     required init(address: String) {
         self.address = address
         self.error = false
     }
-    
+
     func update(completionHandler: () -> Void) {
         let parameters = ["data": self.address]
-        
+
         Alamofire.request(.POST, ServerInfo.endpointForServerInformation(),
             parameters: parameters,
             encoding: .JSON)
@@ -48,7 +48,7 @@ class ServerInfo {
                 case .Success:
                     if let value = response.result.value {
                         let jason = JSON(value)
-                        
+
                         if jason["status"] == "error" {
                             self.hostname = jason["data"].stringValue
                             self.error = true
@@ -68,7 +68,7 @@ class ServerInfo {
                 }
         }
     }
-    
+
     private func update_data(json: JSON) {
         self.appid = json["appid"].intValue
         self.dedicated = json["dedicated"].stringValue
@@ -87,14 +87,14 @@ class ServerInfo {
         self.secure = json["secure"].boolValue
         self.steamid = json["steamid"].int64Value
     }
-    
+
     func numberOfPlayersOfMax() -> String? {
         if let numberOfPlayers = self.players?.numberOfPlayers, let maxPlayers = self.maxPlayers {
             return "\(numberOfPlayers)/\(maxPlayers)"
         }
         return nil
     }
-    
+
     // MARK: Endpoints
     class func endpointForServerInformation() -> String {
         return "https://source.fap.no/api/v1/serverinfo"
@@ -107,16 +107,16 @@ class PlayerInfo {
     var numberOfPlayers: Int?
     var players: [Player]
     var error: Bool
-    
+
     required init(address: String) {
         self.address = address
         self.players = []
         self.error = false
     }
-    
+
     func update(completionHandler: () -> Void) {
         let parameters = ["data": self.address]
-        
+
         Alamofire.request(.POST, PlayerInfo.endpointForPlayerInformation(),
             parameters: parameters,
             encoding: .JSON)
@@ -125,7 +125,7 @@ class PlayerInfo {
                 case .Success:
                     if let value = response.result.value {
                         let jason = JSON(value)
-                        
+
                         if jason["status"] == "error" {
                             self.error = true
                         } else {
@@ -141,10 +141,10 @@ class PlayerInfo {
                 }
         }
     }
-    
+
     private func update_data(json: JSON) {
         self.players = []
-        
+
         for pl in json.arrayValue {
             let player = Player(
                 index: pl["index"].intValue,
@@ -152,18 +152,18 @@ class PlayerInfo {
                 name: pl["name"].stringValue,
                 time: pl["time"].floatValue
             )
-            
+
             self.players.append(player)
             self.players.sortInPlace({$0.kills > $1.kills})
         }
         self.numberOfPlayers = self.players.count
     }
-    
+
     // MARK: Endpoints
     class func endpointForPlayerInformation() -> String {
         return "https://source.fap.no/api/v1/playerinfo"
     }
-    
+
 }
 
 
@@ -172,7 +172,7 @@ class Player {
     var kills: Int
     var name: String
     var time: Float
-    
+
     required init(index: Int, kills: Int, name: String, time: Float) {
         self.index = index
         self.kills = kills
