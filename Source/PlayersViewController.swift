@@ -15,11 +15,21 @@ class PlayersViewController: UITableViewController {
     
     var serverInformation: ServerInfo? = nil;
     
+    lazy var refreshFunction: UIRefreshControl = {() -> UIRefreshControl in
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Players"
         
         tableView.registerNib(UINib(nibName: "PlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerTableViewCell")
+        
+        self.refreshControl = refreshFunction
+        self.tableView.addSubview(refreshControl!)
+
         
     }
     
@@ -51,5 +61,12 @@ class PlayersViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell \(indexPath.row)!")
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.serverInformation?.players?.update({
+            self.tableView.reloadData()
+            self.refreshControl!.endRefreshing()
+        })
     }
 }

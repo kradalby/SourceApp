@@ -21,10 +21,18 @@ class InformationViewController: UITableViewController {
     
     var serverInformation: ServerInfo? = nil;
     
+    lazy var refreshFunction: UIRefreshControl = {() -> UIRefreshControl in
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: .ValueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Information"
         
+        self.refreshControl = refreshFunction
+        self.tableView.addSubview(refreshControl!)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,5 +78,12 @@ class InformationViewController: UITableViewController {
                 destination.serverInformation = self.serverInformation
             }
         }
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        self.serverInformation?.update({
+            self.tableView.reloadData()
+            self.refreshControl!.endRefreshing()
+        })
     }
 }
