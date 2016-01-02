@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var serverInformationObjects: [ServerInfo] = []
     
     @IBOutlet var tableView: UITableView!
+    
     @IBAction func addServer(sender: AnyObject) {
         let alert = UIAlertController(title: "New Server", message: nil, preferredStyle: .Alert)
         
@@ -102,8 +103,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("derp")
-        print(segue.identifier)
         if segue.identifier == "SegueInformationViewController" {
             if let destination = segue.destinationViewController as? InformationViewController {
                 print(destination)
@@ -114,6 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.serverInformationObjects.count
@@ -154,9 +154,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell \(indexPath.row)!")
-        let informationViewController = self.storyboard?.instantiateViewControllerWithIdentifier("InformationViewController") as! InformationViewController
         
-        self.navigationController!.pushViewController(informationViewController, animated: true)
+        self.performSegueWithIdentifier("SegueInformationViewController", sender: nil)
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {

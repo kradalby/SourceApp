@@ -30,7 +30,6 @@ class InformationViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.serverInformation = ServerInfo(address: "193.202.115.74:27137")
         self.serverInformation?.update({
             
             self.hostnameLabel.text = self.serverInformation?.hostname
