@@ -35,7 +35,6 @@ class PlayersViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print(serverInformation?.hostname)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

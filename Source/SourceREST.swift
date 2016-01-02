@@ -13,7 +13,6 @@ import Alamofire
 class ServerInfo {
     var address: String
     var appid: Int?
-    var error: String?
     var dedicated: String?
     var gameDescription: String?
     var gamedir: String?
@@ -31,9 +30,11 @@ class ServerInfo {
     var steamid: Int64?
     var version: String?
     var players: PlayerInfo?
+    var error: Bool
     
     required init(address: String) {
         self.address = address
+        self.error = false
     }
     
     func update(completionHandler: () -> Void) {
@@ -49,10 +50,12 @@ class ServerInfo {
                         let jason = JSON(value)
                         
                         if jason["status"] == "error" {
-                            self.error = jason["data"].stringValue
+                            self.hostname = jason["data"].stringValue
+                            self.error = true
                         } else {
                             let serverInfoJSON = jason["data"][self.address]
                             self.update_data(serverInfoJSON)
+                            self.error = false
                         }
                         if self.players == nil {
                             self.players = PlayerInfo(address: self.address)
@@ -61,6 +64,7 @@ class ServerInfo {
                     }
                 case .Failure(let error):
                     print(error)
+                    self.error = true
                 }
         }
     }
@@ -100,13 +104,14 @@ class ServerInfo {
 
 class PlayerInfo {
     var address: String
-    var error: String?
     var numberOfPlayers: Int?
     var players: [Player]
+    var error: Bool
     
     required init(address: String) {
         self.address = address
         self.players = []
+        self.error = false
     }
     
     func update(completionHandler: () -> Void) {
@@ -122,15 +127,17 @@ class PlayerInfo {
                         let jason = JSON(value)
                         
                         if jason["status"] == "error" {
-                            self.error = jason["data"].stringValue
+                            self.error = true
                         } else {
                             let serverInfoJSON = jason["data"][self.address]
                             self.update_data(serverInfoJSON)
+                            self.error = false
                         }
                         completionHandler()
                     }
                 case .Failure(let error):
                     print(error)
+                    self.error = true
                 }
         }
     }
