@@ -29,8 +29,6 @@ class PlayersViewController: UITableViewController {
         
         self.refreshControl = refreshFunction
         self.tableView.addSubview(refreshControl!)
-
-        
     }
     
     override func viewWillAppear(animated: Bool) {

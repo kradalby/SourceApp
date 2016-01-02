@@ -38,29 +38,9 @@ class InformationViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.populateLabels()
         self.serverInformation?.update({
-            
-            self.hostnameLabel.text = self.serverInformation?.hostname
-            self.playersLabel.text = self.serverInformation?.numberOfPlayersOfMax()
-            self.mapLabel.text = self.serverInformation?.map
-            self.gameLabel.text = self.serverInformation?.gameDescription
-            
-            if let secure = self.serverInformation?.secure {
-                if secure {
-                    self.secureLabel.text = "Yes"
-                } else {
-                    self.secureLabel.text = "No"
-                }
-            }
-            
-            if let os = self.serverInformation?.os {
-                if os == "l" {
-                    self.osLabel.text = "Linux"
-                } else {
-                    self.osLabel.text = "Windows"
-                }
-            }
-            
+            self.populateLabels()
             self.tableView.reloadData()
         })
         
@@ -70,12 +50,36 @@ class InformationViewController: UITableViewController {
         print("You selected cell \(indexPath.row)!")
     }
     
+    
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SeguePlayersViewController" {
             if let destination = segue.destinationViewController as? PlayersViewController {
                 print(destination)
                 destination.serverInformation = self.serverInformation
+            }
+        }
+    }
+    
+    func populateLabels() {
+        self.hostnameLabel.text = self.serverInformation?.hostname
+        self.playersLabel.text = self.serverInformation?.numberOfPlayersOfMax()
+        self.mapLabel.text = self.serverInformation?.map
+        self.gameLabel.text = self.serverInformation?.gameDescription
+        
+        if let secure = self.serverInformation?.secure {
+            if secure {
+                self.secureLabel.text = "Yes"
+            } else {
+                self.secureLabel.text = "No"
+            }
+        }
+        
+        if let os = self.serverInformation?.os {
+            if os == "l" {
+                self.osLabel.text = "Linux"
+            } else {
+                self.osLabel.text = "Windows"
             }
         }
     }

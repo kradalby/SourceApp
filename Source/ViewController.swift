@@ -127,6 +127,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.addressLabel.text = serverInfo.address
         cell.playersLabel.text = serverInfo.numberOfPlayersOfMax()
 
+        if serverInfo.error {
+            cell.backgroundColor = UIColor.redColor()
+        }
         
         return cell
     }
