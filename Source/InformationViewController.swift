@@ -19,7 +19,7 @@ class InformationViewController: UITableViewController {
     @IBOutlet weak var gameLabel: UILabel!
 
 
-    var serverInformation: ServerInfo? = nil;
+    var serverInformation: ServerInfo? = nil
 
     lazy var refreshFunction: UIRefreshControl = {() -> UIRefreshControl in
         let refreshControl = UIRefreshControl()
@@ -73,7 +73,7 @@ class InformationViewController: UITableViewController {
             }
         }
 
-        if let os = self.serverInformation?.os {
+        if let os = self.serverInformation?.operatingSystem {
             if os == "l" {
                 self.osLabel.text = "Linux"
             } else {

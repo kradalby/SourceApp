@@ -4,7 +4,7 @@ included:
 excluded:
   - Carthage
   - Source/AppDelegate.swift
-line_length: 110
+line_length: 200
 type_body_length:
   - 300 # warning
   - 400 # error

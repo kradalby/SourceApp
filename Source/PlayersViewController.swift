@@ -43,14 +43,16 @@ class PlayersViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("PlayerTableViewCell", forIndexPath: indexPath) as! PlayerTableViewCell
+        if let cell = self.tableView.dequeueReusableCellWithIdentifier("PlayerTableViewCell", forIndexPath: indexPath) as? PlayerTableViewCell {
+            cell.playerNameLabel?.text = self.serverInformation?.players?.players[indexPath.row].name
+            if let kills = self.serverInformation?.players?.players[indexPath.row].kills {
+                cell.killsLabel.text = "\(kills)"
+            }
 
-        cell.playerNameLabel?.text = self.serverInformation?.players?.players[indexPath.row].name
-        if let kills = self.serverInformation?.players?.players[indexPath.row].kills {
-            cell.killsLabel.text = "\(kills)"
+            return cell
         }
 
-        return cell
+        return PlayerTableViewCell()
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

@@ -72,25 +72,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
         // Load the servers from the database and query the API
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            let managedContext = appDelegate.managedObjectContext
 
-        let managedContext = appDelegate.managedObjectContext
+            let fetchRequest = NSFetchRequest(entityName: "Server")
 
-        let fetchRequest = NSFetchRequest(entityName: "Server")
+            do {
+                let results = try managedContext.executeFetchRequest(fetchRequest)
+                if let servers = results as? [NSManagedObject] {
+                    self.servers = servers
+                    for server in servers {
+                        if let address = server.valueForKey("address") as? String, let port = server.valueForKey("port") as? Int {
+                            self.addServerInformationObject("\(address):\(port)")
+                        }
+                    }
+                }
 
-        do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            servers = results as! [NSManagedObject]
-
-            for server in servers {
-                let address = server.valueForKey("address") as! String
-                let port = server.valueForKey("port") as! Int
-                self.addServerInformationObject("\(address):\(port)")
+            } catch {
+                print("Could not fetch \(error)")
             }
-        } catch {
-            print("Could not fetch \(error)")
         }
-
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -116,18 +117,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("ServerTableViewCell", forIndexPath: indexPath) as! ServerTableViewCell
+        if let cell = self.tableView.dequeueReusableCellWithIdentifier("ServerTableViewCell", forIndexPath: indexPath) as? ServerTableViewCell {
+            let serverInfo = self.serverInformationObjects[indexPath.row]
+            cell.hostnameLabel.text = serverInfo.hostname
+            cell.addressLabel.text = serverInfo.address
+            cell.playersLabel.text = serverInfo.numberOfPlayersOfMax()
 
-        let serverInfo = self.serverInformationObjects[indexPath.row]
-        cell.hostnameLabel.text = serverInfo.hostname
-        cell.addressLabel.text = serverInfo.address
-        cell.playersLabel.text = serverInfo.numberOfPlayersOfMax()
-
-        if serverInfo.error {
-            cell.backgroundColor = UIColor.redColor()
+            if serverInfo.error {
+                cell.backgroundColor = UIColor.redColor()
+            }
+            return cell
         }
 
-        return cell
+        return ServerTableViewCell()
     }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -141,6 +143,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if editingStyle == .Delete {
             serverInformationObjects.removeAtIndex(indexPath.row)
 
+            print(servers.count)
+            print(serverInformationObjects.count)
             let serverToDelete = servers[indexPath.row]
             self.deleteServer(serverToDelete)
 
@@ -178,34 +182,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func saveServer(address: String, port: Int) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            let managedContext = appDelegate.managedObjectContext
 
-        let managedContext = appDelegate.managedObjectContext
+            let entity = NSEntityDescription.entityForName("Server", inManagedObjectContext: managedContext)
 
-        let entity = NSEntityDescription.entityForName("Server", inManagedObjectContext: managedContext)
+            let server = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
 
-        let server = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            server.setValue(address, forKey: "address")
+            server.setValue(port, forKey: "port")
 
-        server.setValue(address, forKey: "address")
-        server.setValue(port, forKey: "port")
-
-        do {
-            try managedContext.save()
-        } catch {
-            print("Could not save \(error)")
+            do {
+                try managedContext.save()
+            } catch {
+                print("Could not save \(error)")
+            }
         }
     }
 
     func deleteServer(server: NSManagedObject) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            let managedContext = appDelegate.managedObjectContext
 
-        let managedContext = appDelegate.managedObjectContext
-
-        managedContext.deleteObject(server)
-        do {
-            try managedContext.save()
-        } catch {
-            print("Could not save \(error)")
+            managedContext.deleteObject(server)
+            do {
+                try managedContext.save()
+            } catch {
+                print("Could not save \(error)")
+            }
         }
     }
 
@@ -213,7 +217,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-

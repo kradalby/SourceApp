@@ -19,10 +19,10 @@ class ServerInfo {
     var hostname: String?
     var map: String?
     var maxPlayers: Int?
-    var network_version: Int?
+    var networkVersion: Int?
     var numberOfBots: Int?
     var numberOfPlayers: Int?
-    var os: String?
+    var operatingSystem: String?
     var passworded: Bool?
     var ping: Float?
     var port: Int?
@@ -77,10 +77,10 @@ class ServerInfo {
         self.hostname = json["hostname"].stringValue
         self.map = json["map"].stringValue
         self.maxPlayers = json["maxplayers"].intValue
-        self.network_version = json["network_version"].intValue
+        self.networkVersion = json["network_version"].intValue
         self.numberOfBots = json["numbots"].intValue
         self.numberOfPlayers = json["numplayers"].intValue
-        self.os = json["os"].stringValue
+        self.operatingSystem = json["os"].stringValue
         self.passworded = json["passworded"].boolValue
         self.ping = json["ping"].floatValue
         self.port = json["port"].intValue
@@ -180,4 +180,3 @@ class Player {
         self.time = time
     }
 }
-
