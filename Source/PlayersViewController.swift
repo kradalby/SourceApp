@@ -13,7 +13,7 @@ import UIKit
 class PlayersViewController: UITableViewController {
 
 
-    var serverInformation: ServerInfo? = nil;
+    var serverInformation: ServerInfo? = nil
 
     lazy var refreshFunction: UIRefreshControl = {() -> UIRefreshControl in
         let refreshControl = UIRefreshControl()
