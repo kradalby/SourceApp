@@ -141,13 +141,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            serverInformationObjects.removeAtIndex(indexPath.row)
-
-            print(servers.count)
-            print(serverInformationObjects.count)
             let serverToDelete = servers[indexPath.row]
             self.deleteServer(serverToDelete)
-
+            serverInformationObjects.removeAtIndex(indexPath.row)
+            servers.removeAtIndex(indexPath.row)
 
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
 
@@ -188,6 +185,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let entity = NSEntityDescription.entityForName("Server", inManagedObjectContext: managedContext)
 
             let server = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            self.servers.append(server)
 
             server.setValue(address, forKey: "address")
             server.setValue(port, forKey: "port")
